@@ -23,4 +23,19 @@ class Task < Post
 
     [deadline, @text, time_string]
   end
+
+  def to_db_hash
+    super.merge(
+      {
+        text: @text,
+        due_date: @due_date.to_s
+      }
+    )
+  end
+
+  def load_data(data_hash)
+    super
+
+    @due_date = Date.parse(data_hash['due_date'])
+  end
 end

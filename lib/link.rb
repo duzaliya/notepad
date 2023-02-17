@@ -18,4 +18,19 @@ class Link < Post
 
     [@url, @text, time_string]
   end
+
+  def to_db_hash
+    super.merge(
+      {
+        text: @text,
+        url: @url
+      }
+    )
+  end
+
+  def load_data(data_hash)
+    super
+
+    @url = data_hash['url']
+  end
 end
